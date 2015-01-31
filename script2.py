@@ -2,7 +2,6 @@
 sfile = open("db.txt")
 
 dict_state = {}
-dict_seasons = {}
 dict_types = {}
 
 #process the file and build the necessary dictionaries
@@ -14,54 +13,20 @@ def add_to_dict(new_name, the_key):
         dict_types[the_key] = []
     else:
         if new_name not in dict_types[the_key]:
-            dict_types[the_key].append(new_name)
-
-
+            return dict_types[the_key].append(new_name)
 
 
 for line in sfile:
-    entry = line.strip()
-    my_list = entry.split(",")
+    my_list = line.strip().split(",")
     vname, vtype, vseason, vstate  = my_list
 
-    dict_state[(vstate,vseason)] = []
-
-    add_to_dict(vname,vtype)
-
-
-
-
-
-
-
-
-
-    # if vname not in dict_types.values():
-    #     dict_types[vtype] = [vname]
-    #     type_list = dict_types[vtype]
-    # else:
-    #     type_list.append(vname)
-
-
-
-
-
-
-    # dict_types[vtype] = []
-    # type_list = dict_types[vtype]
-
-    # if vname not in dict_types.values():
-    #     type_list.append(vname)
-
-
-
-#for print debugging
-print dict_state.items()
-print "*" * 10
-print dict_types.items()
-print "*" * 10
-
+    for k,v in dict_state:
+        add_to_dict(vname,vtype)
     
+    dict_state[(vstate,vseason)] = dict_types
+        
+
+print dict_state[('CA', 'Late January')]
 
 
 
@@ -71,4 +36,3 @@ print "*" * 10
 
 
     #searching: I live in X state, the time frame is X, I want X# of X types of food. 
-    
