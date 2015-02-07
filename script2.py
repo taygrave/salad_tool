@@ -1,38 +1,33 @@
+import sqlite3
 
 sfile = open("db.txt")
 
-dict_state = {}
-dict_types = {}
-
 #process the file and build the necessary dictionaries
 
-#currently just for type dict
-def add_to_dict(new_name, the_key):
-    """Adds data to dictionary if not already present"""
-    if the_key not in dict_types:
-        dict_types[the_key] = []
-    else:
-        if new_name not in dict_types[the_key]:
-            return dict_types[the_key].append(new_name)
+#searching: I live in X state, the time frame is X, I want X# of X types of food. 
+
+def add_to_db(sfile):
+    """Adds new data file to database in the Master table"""
+    #making connection with SQL database
+    conn = sqlite3.connect("saladtool.db")
+    cursor = conn.cursor()
+    query = """INSERT INTO Master (name, type, season, state) VALUES (?,?,?,?)"""
+
+    #data file must be text with four columns, for name, type, season, and state
+    for line in sfile:
+        my_list = line.strip().split(",")
+        vname, vtype, vseason, vstate  = my_list
+        #FIXME - names cutting off at 10 chars
+        cursor.execute(query, (vname, vtype, vseason, vstate))
+        conn.commit()
+
+    print "Successfully added %s to Master table in saladtool.db" %sfile
 
 
-for line in sfile:
-    my_list = line.strip().split(",")
-    vname, vtype, vseason, vstate  = my_list
-
-    for k,v in dict_state:
-        add_to_dict(vname,vtype)
-    
-    dict_state[(vstate,vseason)] = dict_types
-        
-
-print dict_state[('CA', 'Late January')]
-
-
-
-# make dictionaries inside of dictionaries
-#first dictionary will be the state, which then contains dictionaries seasons 
-    #which then contain dictionary types with a list value of w types of food  
-
-
-    #searching: I live in X state, the time frame is X, I want X# of X types of food. 
+# NEXT STEPS:
+# play with bootstrap to get a prettier page
+# Put a list of states and their abbreviations into db
+# put a list of seasons and their abbreviations into db
+# use jinja to fill them into the form as options
+# scrape rest of website to get complete listing of states and foods
+# enter those into master table in db too

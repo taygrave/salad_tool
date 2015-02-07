@@ -1,0 +1,108 @@
+Skip to content
+Sign up Sign in This repository
+Explore
+Features
+Enterprise
+Blog
+ Star 0  Fork 0 taygrave/hbforms
+ branch: master  hbforms/forms.html
+Hackbright Student 11 days ago First Commit
+0 contributors
+95 lines (75 sloc)  3.006 kb RawBlameHistory  
+<!DOCTYPE HTML>
+<html>
+
+<header>
+    <title>Ubermelon Order Form</title>
+</header>
+
+<body>
+
+<h1>Order!</h1>
+
+<table border=1>
+    
+    <thead>
+        <tr><th>Prices</th></tr>
+        <tr>
+        <th>Melon Name</th>
+        <th>Price per lb.</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Watermelon</td>
+            <td>$1.59</td>
+        </tr>
+        <tr>
+            <td>Honeydew</td>
+            <td>$0.99</td>
+        </tr>
+        <tr>
+            <td>Canteloupe</td>
+            <td>$1.29</td>
+        </tr>
+        <tr>
+            <td>Crenshaw</td>
+            <td>$2.19</td>
+        </tr>
+        <tr>
+            <td>Canary</td>
+            <td>$11.99</td>
+        </tr>                                        
+    </tbody>
+</table>
+
+<p>Place your orders here! You know you want to.</p>
+
+<form action="https://ubermelon-order-form.herokuapp.com/process" method="GET">
+    <label for="first">First Name:</label><input type="text" name="firstname" id="first"><br>
+    
+    <label for="last">Last Name:</label><input type="text" name="lastname" id="last"><br>
+    
+    <label for="melon">Melon Type:</label><select name="melontype" id="melon">
+        <label><option value="watermelon">Watermelon</option></label>
+        <label><option value="honeydew">Honeydew</option></label>
+        <label><option value="canteloupe">Canteloupe</option></label>
+        <label><option value="crenshaw">Crenshaw</option></label>
+        <label><option value="canary">Canary</option></label>
+    </select><br>
+    
+    <label for="quantity">Quantity*:</label> <input type="text" name="quantity" id="quantity"><br>
+
+    Delivery Time:
+    <label><input type="radio" name="time" value="am">AM</label>
+    <label><input type="radio" name="time" value="pm">PM</label>
+    <label><input type="radio" name="time" value="wat">wat</label><br>
+
+    Returning Customer?
+    <label><input type="radio" name="returning" value="yes">YES</label>
+    <label><input type="radio" name="returning" value="no">NO</label><br>
+
+    For Statistical Purposes:
+    <label><input type="checkbox" name="stats" value="dog">Dog</label>
+    <label><input type="checkbox" name="stats" value="cat">Cat</label>
+    <label><input type="checkbox" name="stats" value="hedgehog">Hedgehog</label>
+    <label><input type="checkbox" name="stats" value="balloonicorn">Balloonicorn</label>
+    <label><input type="checkbox" name="stats" value="yak">Yak</label><br>
+
+    <label for="special">Any special requests?</label><input type="text" name="special" id="special"><br>
+    <label><input type="color" name="color" value="color">Pick a Color!</label><br>
+    <label><input type="date" name="date" value="date1">Date?</label><br>
+    <label><input type="file" name="file" value="file"></label><br>
+    <label><input type="number" step="any" name="num" value="num">Enter number</label><br>
+
+
+    <input type="submit" value="ORDER SOME MELONS!">
+
+</form>
+
+</body>
+
+<footer>
+*Quantities are given by the flat.
+</footer>
+
+</html>
+Status API Training Shop Blog About
+© 2015 GitHub, Inc. Terms Privacy Security Contact
