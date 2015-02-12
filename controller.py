@@ -35,15 +35,11 @@ def get_seasons():
 
     return season_list
 
+def pickme(state, season, ftype, number=1):
+    """Queries the database based on state and season for the particular food type (Vegetable, Fruit, Seafood, or Nuts) and, if defined, number of those items (default 1). """
+    pass
+
 state_list = get_states()
 season_list = get_seasons()
-
-# NEXT STEPS:
-
-# make form submission work
-# make form submission return options from db
-# scrape rest of website to get complete listing of states and foods
-# enter those into master table in db too (with foreign key refs)
-# play with bootstrap to get a prettier page
 
 

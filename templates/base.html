@@ -18,6 +18,7 @@
     <body>
         <h3>Welcome to Salad Mixie!</h3><br>
       
+        <!-- Need to clear up form here so that it's validated (can't enter anything but number in qty boxes, can't enter anything at all in qty boxes unless their associate boxes are checked in the first place) -->
         <form action="/" method="GET" id="saladform">
             <label for="state">State: </label><select name="state" id="state">
             {% for state in state_list %}
@@ -35,18 +36,18 @@
             <table>
                 <tbody>
                 <tr>
-                    <td><label><input type="checkbox" name="typeselect" value="veggie">Veggies </label></td>
-                    <td><label for="veggie_count"><input type="number" id="veggie_count">Qty </label></td>
+                    <td><label><input type="checkbox" name="veggie">Veggies </label></td>
+                    <td><label for="veggie_count"><input type="number" id="vegqty" name="vegqty">Qty </label></td>
                 </tr>
                 <tr>
-                    <td><label><input type="checkbox" name="typeselect" value="fruit">Fruit</label></td>
-                    <td><label for="fruit_count"><input type="number" id="fruit_count">Qty </label></td>
+                    <td><label><input type="checkbox" name="fruit">Fruit</label></td>
+                    <td><label for="fruit_count"><input type="number" id="frtqty" name="frtqty">Qty </label></td>
                 </tr>
                 <tr>
-                    <td><label><input type="checkbox" name="typeselect" value="nuts">Nuts</label></td>
+                    <td><label><input type="checkbox" name="nuts">Nuts</label></td>
                 </tr>
                 <tr>
-                    <td> <label><input type="checkbox" name="typeselect" value="seafood">Seafood</label></td>
+                    <td> <label><input type="checkbox" name="seafood">Seafood</label></td>
                 </tr>
                 <!-- TODO Could later add more options for cheese or crispies -->
                 </tbody>
@@ -57,6 +58,7 @@
         <br>
         <br>
         <h2> {{state}}, {{season}} </h2>
+        <h3> {{veggie}}, {{vegqty}}, {{fruit}}, {{frtqty}}, {{nuts}}, {{seafood}} </h3>
 
         
     </body>
