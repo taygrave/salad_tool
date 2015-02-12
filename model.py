@@ -40,6 +40,7 @@ def states_to_db():
 
     print "Successfully added states to States table in saladtool.db"
 
+#Q: Did i really have to create a class? cant I return these values better?? Was getting an error if i just returned the result of the following function w/o making a whole class and everything
 class State(object):
     """A wrapper that corresponds to rows in the States table"""
     def __init__(self, abbrv, state):
@@ -75,3 +76,5 @@ state_list = get_states()
 # scrape rest of website to get complete listing of states and foods
 # enter those into master table in db too
 # play with bootstrap to get a prettier page
+
+
