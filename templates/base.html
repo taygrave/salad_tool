@@ -26,8 +26,9 @@
             </select><br>
             
             <label for="season">Season: </label><select name="season" id="season">
-                <!-- FIXME put in jinga here to fill out the dropbox for all seasons -->
-                <label><option value="ejan">Early January</option></label>
+            {% for abbrv, season in season_list %}
+                <label><option value={{abbrv}}>{{season}}</option></label>
+            {% endfor %}
             </select><br>
             <br>
             What goodies would you like in your salad?<br>
