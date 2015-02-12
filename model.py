@@ -8,6 +8,7 @@ import csv
 CONN = sqlite3.connect("saladtool.db")
 CURSOR = CONN.cursor()
 
+#Use this for one time adds to db of all foods once scraped new data from web: http://www.sustainabletable.org/seasonalguide/seasonalfoodguide.php
 def add_to_db(sfile):
     """Adds new data file to database in the Master table"""
 
@@ -25,6 +26,7 @@ def add_to_db(sfile):
 
     print "Successfully added %s to Master table in saladtool.db" %sfile
 
+#Already used for a one-time add to db for list of states
 def states_to_db():
     """Adds new data file to database in the States table"""
     #making connection with SQL database
@@ -49,32 +51,5 @@ class State(object):
 
     def __repr__(self):
         return "<State: %s, %s>" %(self.abbrv, self.state)
-
-
-def get_states():
-    """Returns a list of the states from db for input to jinja list in html form"""
-    query = """SELECT * FROM States"""
-    CURSOR.execute(query)
-    states = CURSOR.fetchall()
-    state_list = []
-
-    for row in states:
-        state = State(row[0], row[1])
-        state_list.append(state)
-
-    return state_list
-
-state_list = get_states()
-
-
-
-# NEXT STEPS:
-
-# Put a list of states and their abbreviations into db
-# put a list of seasons and their abbreviations into db
-# use jinja to fill them into the form as options
-# scrape rest of website to get complete listing of states and foods
-# enter those into master table in db too
-# play with bootstrap to get a prettier page
 
 

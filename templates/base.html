@@ -18,7 +18,7 @@
     <body>
         <h3>Welcome to Salad Mixie!</h3><br>
       
-        <form action="/made" method="GET" id="saladform">
+        <form action="/" method="GET" id="saladform">
             <label for="state">State: </label><select name="state" id="state">
             {% for state in state_list %}
                 <label><option value={{state.abbrv}}>{{state.state}}</option></label>
@@ -51,7 +51,12 @@
                 <!-- TODO Could later add more options for cheese or crispies -->
                 </tbody>
             </table>
+            <input type="submit" value="Salad Mixie Magic!">
         </form>
+        <br>
+        <br>
+        <br>
+        <h2> {{state}}, {{season}} </h2>
 
         
     </body>

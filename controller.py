@@ -38,3 +38,12 @@ def get_seasons():
 state_list = get_states()
 season_list = get_seasons()
 
+# NEXT STEPS:
+
+# make form submission work
+# make form submission return options from db
+# scrape rest of website to get complete listing of states and foods
+# enter those into master table in db too (with foreign key refs)
+# play with bootstrap to get a prettier page
+
+
