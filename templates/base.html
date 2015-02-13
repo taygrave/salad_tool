@@ -21,14 +21,14 @@
         <!-- Need to clear up form here so that it's validated (can't enter anything but number in qty boxes, can't enter anything at all in qty boxes unless their associate boxes are checked in the first place) -->
         <form action="/" method="GET" id="saladform">
             <label for="state">State: </label><select name="state" id="state">
-            {% for state in state_list %}
-                <label><option value={{state.abbrv}}>{{state.state}}</option></label>
+            {% for abbrv, name in state_list %}
+                <label><option value={{abbrv}}>{{name}}</option></label>
             {% endfor %}
             </select><br>
             
             <label for="season">Season: </label><select name="season" id="season">
-            {% for abbrv, season in season_list %}
-                <label><option value={{abbrv}}>{{season}}</option></label>
+            {% for abbrv, name in season_list %}
+                <label><option value={{abbrv}}>{{name}}</option></label>
             {% endfor %}
             </select><br>
             <br>

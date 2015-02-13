@@ -5,10 +5,11 @@ import controller
 app = Flask(__name__)
 
 
-@app.route("/", methods =["GET"])
+@app.route("/", methods=["GET"])
 def homepage():
-    state_list = controller.state_list
-    season_list = controller.season_list
+
+    state_list = controller.get_states()
+    season_list = controller.get_seasons()
 
     state = request.args.get("state")
     season = request.args.get("season")
@@ -29,7 +30,7 @@ def homepage():
 
 
 
-    return render_template("base.html", state_list = state_list, season_list = season_list, state = state, season = season, veggie = veggie, vegqty = vegqty, fruit = fruit, frtqty = frtqty, nuts = nuts, seafood = seafood)
+    return render_template("base.html", state_list=state_list, season_list=season_list, state=state, season=season, veggie=veggie, vegqty=vegqty, fruit=fruit, frtqty=frtqty, nuts=nuts, seafood=seafood)
 
 
 

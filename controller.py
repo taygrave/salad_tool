@@ -1,37 +1,25 @@
 import model
-import sqlite3
 
 def get_states():
-    """Returns a list of the states from db for input to jinja list in html form"""
-    query = """SELECT * FROM States"""
-    model.CURSOR.execute(query)
-    states = model.CURSOR.fetchall()
+    """Returns a list of the states from db for jinja input to formselect"""
+    #FIXME: Have return only states that have food info in Foods table
+    s = model.connect()
+    allstates = s.query(model.State).all()
     state_list = []
 
-    for row in states:
-        state = model.State(row[0], row[1])
-        state_list.append(state)
+    for state in allstates:
+        state_list.append((state.abbrv, state.name))
 
     return state_list
 
 def get_seasons():
-    """Returns a list of all seasons by making a set of db season types"""
-    query = """SELECT * FROM Master"""
-    model.CURSOR.execute(query)
-    results = model.CURSOR.fetchall()
-    seasons = set([])
+    """Returns a list of all seasons from db for jinja input to formselect"""
+    s = model.connect()
+    allseasons = s.query(model.Season).all()
     season_list = []
 
-    for item in results:
-        seasons.add(item[3])
-
-    for item in seasons:
-        if item[:1] == "E":
-            abbrv = item[:1]+item[6:9]
-        else:
-            abbrv = item[:1]+item[5:8]
-
-        season_list.append((abbrv,item))
+    for season in allseasons:
+        season_list.append((season.abbrv,season.name))
 
     return season_list
 
@@ -39,7 +27,5 @@ def pickme(state, season, ftype, number=1):
     """Queries the database based on state and season for the particular food type (Vegetable, Fruit, Seafood, or Nuts) and, if defined, number of those items (default 1). """
     pass
 
-state_list = get_states()
-season_list = get_seasons()
 
 
