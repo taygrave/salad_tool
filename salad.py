@@ -25,6 +25,8 @@ def homepage():
 
     check_dict = {"Vegetable": (veggie, vegqty), "Fruit": (fruit, frtqty), "Nuts": (nuts, 1), "Seafood": (seafood, 1)}
 
+    #FIXME: starting at EJan otherwise throws error when unset
+    season = "EJan"
     season = controller.season_name(season)
     
     food_choices = {}
