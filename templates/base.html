@@ -59,9 +59,20 @@
         <br>
         <h2> State: {{state}}, Season: {{season}} </h2>
         
-        {% for veg in veg_choices %}
-        <p> Vegetable: {{veg.name}} </p>
+        {% for k, v in food_choices.items() %}
+            {% if k != 'messages' and v != [] %}
+                {% for item in v %}
+                    <p> {{k}}: {{item.name}} </p>
+                {% endfor %}
+            {% endif %}
         {% endfor %} 
+
+        {% if food_choices['messages'] != [] %}
+            Your query had a few mismatches:<br>
+            {% for item in food_choices['messages'] %}
+                {{item}}<br>
+            {% endfor %}
+        {% endif %}
 
 
 

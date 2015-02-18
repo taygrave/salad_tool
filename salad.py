@@ -12,6 +12,8 @@ def homepage():
     state_list = controller.get_states()
     season_list = controller.get_seasons()
 
+    #FIXME: gotta put in some form validation
+
     state = request.args.get("state")
     season = request.args.get("season")
     veggie = request.args.get("veggie")
@@ -21,46 +23,34 @@ def homepage():
     nuts = request.args.get("nuts")
     seafood = request.args.get("seafood")
 
-    # some formulas here for querrying db from controller file depending on form inputs
-
-    # if veggie is 'on' then search db for veggies from selected state and season only and return vegqty # of items
-    # same for fruit (could even be done in same formula)
-    # if nuts, seafood on return one (maybe even these in the same formula with the # of things being a default!)
-    #controller.pickme(state, season, ftype, [#])
-
-    check_dict = {"veggie": (veggie, vegqty), "fruit": (fruit, frtqty), "nuts": (nuts, 1), "seafood": (seafood, 1)}
-
-    # def pickme(state, seas_abbrv, ftype, number=1)
+    check_dict = {"Vegetable": (veggie, vegqty), "Fruit": (fruit, frtqty), "Nuts": (nuts, 1), "Seafood": (seafood, 1)}
     
-    # if check_dict['nuts'][0] == 'on':
-    #     season, nut = controller.get_N_or_S(state, season, "Nuts", 1)
-    #     if nut != None:
-    #         nut = nut.name
-    #     else:
-    #         nut = "No local nuts available in %s." %season
-    #     print nut
+    food_choices = {}
+    food_choices['messages'] = []
 
-    # if check_dict['seafood'][0] == 'on':
-    #     season, seafood = controller.get_N_or_S(state, season, "Seafood", 1)
-    #     if seafood != None:
-    #         seafood = seafood.name
-    #     else:
-    #         seafood = "No local seafood available in %s." %season
-    #     print seafood
+    for key in check_dict:
+        if check_dict[key][0] == 'on':
+            ftype = key
+            qty = int(check_dict[key][1])
 
-    if check_dict['veggie'][0] == 'on':
-        ftype = "Vegetable"
-        qty = int(check_dict['veggie'][1])
+            food_list = controller.picker(state, season, ftype)
 
-        veg_list = controller.picker(state, season, ftype)
-        veg_choices = sample(veg_list, qty) 
+            if qty > len(food_list):
+                qty = len(food_list)
+                if qty != 0:
+                    msg = "* Only %d %s availalbe." %(qty, ftype)
+                else: 
+                    msg = "* %s not avaialble." %(ftype)
+                food_choices['messages'].append(msg)
 
-        print veg_choices
-        
+            food_choices[ftype] = sample(food_list, qty)
+
+            #add a msg key to food_choices and print all relevant messages too?
+
+            print food_choices
 
 
-
-    return render_template("base.html", state_list=state_list, season_list=season_list, state=state, season=season, check_dict=check_dict, veg_choices=veg_choices)
+    return render_template("base.html", state_list=state_list, season_list=season_list, state=state, season=season, check_dict=check_dict, food_choices=food_choices)
 
 
 
@@ -73,9 +63,7 @@ if __name__ == "__main__":
 
 # NEXT STEPS:
 
-# form validation?
-# change db so it's using sql alchemy with classes for each food type so is easier to query for
-# make form submission return options from db
+# form validation
 # scrape rest of website to get complete listing of states and foods
 # enter those into master table in db too (with foreign key refs)
 # play with bootstrap to get a prettier page
