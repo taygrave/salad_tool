@@ -29,10 +29,9 @@ def season_name(seas_abbrv):
     season = s.query(model.Season).filter_by(abbrv=seas_abbrv).one().name
     return season
 
-def picker(state, seas_abbrv, ftype):
+def picker(state, season, ftype):
     """Queries the database based on state and season for the particular food type (Vegetable, Fruit, Seafood, or Nuts) and, if defined, number of those items (default 1). """
     s = model.connect()
-    season = season_name(seas_abbrv)
     food_list = s.query(model.Food).filter(model.Food.state==state, model.Food.season==season, model.Food.sort==ftype).all()
 
     return food_list

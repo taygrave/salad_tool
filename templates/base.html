@@ -55,23 +55,22 @@
             <input type="submit" value="Salad Mixie Magic!">
         </form>
         <br>
-        <br>{{check_dict}}
-        <br>
-        <h2> State: {{state}}, Season: {{season}} </h2>
+        <h3> State: {{state}}, Season: {{season}} </h3>
         
         {% for k, v in food_choices.items() %}
             {% if k != 'messages' and v != [] %}
                 {% for item in v %}
-                    <p> {{k}}: {{item.name}} </p>
+                    {{k}}: {{item.name}}<br>
                 {% endfor %}
             {% endif %}
         {% endfor %} 
 
+        <br>
         {% if food_choices['messages'] != [] %}
-            Your query had a few mismatches:<br>
+            <em>Not what you asked for? Here's why:<br>
             {% for item in food_choices['messages'] %}
                 {{item}}<br>
-            {% endfor %}
+            {% endfor %} </em>
         {% endif %}
 
 
