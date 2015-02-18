@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask import session as flask_session
+from random import choice, sample
 import controller
 
 app = Flask(__name__)
@@ -27,10 +28,39 @@ def homepage():
     # if nuts, seafood on return one (maybe even these in the same formula with the # of things being a default!)
     #controller.pickme(state, season, ftype, [#])
 
+    check_dict = {"veggie": (veggie, vegqty), "fruit": (fruit, frtqty), "nuts": (nuts, 1), "seafood": (seafood, 1)}
+
+    # def pickme(state, seas_abbrv, ftype, number=1)
+    
+    # if check_dict['nuts'][0] == 'on':
+    #     season, nut = controller.get_N_or_S(state, season, "Nuts", 1)
+    #     if nut != None:
+    #         nut = nut.name
+    #     else:
+    #         nut = "No local nuts available in %s." %season
+    #     print nut
+
+    # if check_dict['seafood'][0] == 'on':
+    #     season, seafood = controller.get_N_or_S(state, season, "Seafood", 1)
+    #     if seafood != None:
+    #         seafood = seafood.name
+    #     else:
+    #         seafood = "No local seafood available in %s." %season
+    #     print seafood
+
+    if check_dict['veggie'][0] == 'on':
+        ftype = "Vegetable"
+        qty = int(check_dict['veggie'][1])
+
+        veg_list = controller.picker(state, season, ftype)
+        veg_choices = sample(veg_list, qty) 
+
+        print veg_choices
+        
 
 
 
-    return render_template("base.html", state_list=state_list, season_list=season_list, state=state, season=season, veggie=veggie, vegqty=vegqty, fruit=fruit, frtqty=frtqty, nuts=nuts, seafood=seafood)
+    return render_template("base.html", state_list=state_list, season_list=season_list, state=state, season=season, check_dict=check_dict, veg_choices=veg_choices)
 
 
 

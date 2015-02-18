@@ -55,10 +55,15 @@
             <input type="submit" value="Salad Mixie Magic!">
         </form>
         <br>
+        <br>{{check_dict}}
         <br>
-        <br>
-        <h2> {{state}}, {{season}} </h2>
-        <h3> {{veggie}}, {{vegqty}}, {{fruit}}, {{frtqty}}, {{nuts}}, {{seafood}} </h3>
+        <h2> State: {{state}}, Season: {{season}} </h2>
+        
+        {% for veg in veg_choices %}
+        <p> Vegetable: {{veg.name}} </p>
+        {% endfor %} 
+
+
 
         
     </body>
